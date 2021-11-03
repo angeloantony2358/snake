@@ -3,7 +3,7 @@ var ctx = canvas.getContext('2d');
 var scorep = document.getElementById('score');
 var restartP = document.getElementById('restart');
 restartP.style.display = 'none';
-var audio = new Audio('./crunch.wav');
+var audio = new Audio('crunch.wav');
 var volume = 1;
 var unmute = document.getElementById('speaker');
        
