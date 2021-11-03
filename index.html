@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNAKE</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="blur-effect"></div>
+    <nav>
+        <ul>
+            <li class="audio">
+                <div class="speaker" id ='speaker'>
+                    <input type="checkbox" name="un-mute" id="un-mute">
+                    <label for="un-mute" class="unmute" onclick="volume = 1;console.log(volume)">
+                        <img src="./mute.svg" alt="Mute_Icon.svg" title="Mute icon">
+                    </label>
+                    <label for="un-mute" class="mute" onclick="volume = 0; console.log(volume)">
+                        <img src="./speaker.svg" alt="Speaker_Icon.svg" title="Unmute/speaker icon">
+                    </label>
+                </div>
+            </li>
+            <li class="logo">SNAKE</li>
+            <li><div class = 'menu-button'>
+                <div class = 'menu-button_burger'></div>
+            </div></li>
+        </ul>
+    </nav>
+
+    <div class="menu-list">
+        <div class="menu-text">
+            <h3>About Game</h3>
+            <p>The orignal game was programmed by <a href="https://g.co/kgs/sxp7um">Taneli Armanto</a> and was published on the <a href="https://en.wikipedia.org/wiki/Nokia_6110">Nokia 6110</a>.<br><br><br><br></p>
+            <h3>Controls</h3>
+            <p>Arrow keys for movement and Space for restarting the game when it ends.<br><br><br><br></p>
+            <h3>Page Created by</h3>
+            <p><a href="https://www.instagram.com/_angeloantony_/">Angelo Antony</a></p>    
+        </div>
+    </div>
+
+
+    
+    <canvas width="640" height="640" id="canvas"></canvas>
+    <p id = 'score'>SCORE</p>
+    <p id = 'restart'>Press Space to restart the game.</p>
+    
+    <script src="/script.js"></script>   
+</body>
+</html>
