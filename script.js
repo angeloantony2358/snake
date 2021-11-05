@@ -27,6 +27,7 @@ function drawSnake() {
     snake.forEach(drawSnakePart);
 }
 
+drawSnake();
 
 // Params controlling snake and food.
 let foodx;
