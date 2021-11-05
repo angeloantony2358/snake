@@ -1,14 +1,17 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var scorep = document.getElementById('score');
+
 var restartP = document.getElementById('restart');
 restartP.style.display = 'none';
+
 var audio = new Audio('crunch.wav');
 var volume = 1;
 var unmute = document.getElementById('speaker');
        
-
+// Initial snake position.
 var snake = [{x: 160, y: 200}, {x: 180, y: 200}, {x:200, y: 200}, {x:220, y: 200}, {x:240, y: 200}];
+
 
 // Plots a single segment of the snake on the canvas.
 function drawSnakePart(snakePart) {
@@ -18,19 +21,21 @@ function drawSnakePart(snakePart) {
     //ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
+
+// Plots the snake on the canvas.
 function drawSnake() {
     snake.forEach(drawSnakePart);
 }
 
-drawSnake();
 
-// Amount of change on the snake.
+// Params controlling snake and food.
 let foodx;
 let foody;
 let changingDirection = false;
 let dx = 20;
 let dy = 0;
 let score = 0;
+
 
 // Moves the snake on the screen by editting the snake array.
 function moveSnake() {
@@ -51,6 +56,7 @@ function moveSnake() {
         snake.pop();
     }
 }
+
 
 function clearCanvas() {
     //  Select the colour to fill the drawing
@@ -90,10 +96,12 @@ function changeDirection(event) {
     }
 }
 
+
 function randomFood(min, max) {
     var number =  Math.round((Math.random() * (max - min) + min) / 20) * 20;
     return number;
 }
+
 
 function generateFood() {
     foodx = randomFood(0, canvas.width - 20);
@@ -104,10 +112,12 @@ function generateFood() {
     });
 }
 
+
 function drawFood() {
     ctx.fillStyle = "red";
     ctx.fillRect(foodx, foody, 20 ,20);
 }
+
 
 function gameEnded() {
     for(let i = 4; i< snake.length; i++) {
@@ -123,10 +133,11 @@ function gameEnded() {
     return hitLeftBorder || hitRightBorder || hitTopBorder || hitBottomBorder     
 }
 
+
 //Function to restart the game.
 function restart(e) {
     if (e.keyCode === 32 && gameEnded()) {
-        snake = [{x: 340, y: 320}, {x: 320, y: 320}, {x:300, y: 320}, {x:280, y: 320}, {x:260, y: 320}];
+        snake = [{x: 160, y: 200}, {x: 180, y: 200}, {x:200, y: 200}, {x:220, y: 200}, {x:240, y: 200}];
         dx = 20;
         dy = 0;
         score = 0;
@@ -138,31 +149,6 @@ function restart(e) {
     }
 }
 
-//Fade magic for the text items.
-function fade(element) {
-    var op = 1;
-    var timer = setInterval(function () {
-        if (op <= 0.1) {
-            clearInterval(timer);
-            element.style.display = 'none'
-        }
-        element.style.opacity = op;
-        op -= op * 0.1;
-    }, 10);
-}
-
-function unfade(element) {
-    var op = 0.1;
-    element.style.display = 'block';
-    var timer = setInterval(function () {
-        if (op >= 1) {
-            clearInterval(timer);
-        }
-        element.style.opacity = op;
-        op += op * 0.1;
-    }, 10);
-}
- 
 
 function main() { 
     if (gameEnded()) {
@@ -182,17 +168,18 @@ function main() {
    }, 100)
 }
 
+
 if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     // true for mobile device
     alert('This page is only supported on desktop browser.')
-  }else{
+  } else{
     // false for not mobile device
     main();
     generateFood();   
 }
 
 
-
+// Event listeners for keydown.
 document.addEventListener("keydown",restart);
 document.addEventListener("keydown",changeDirection);
 
@@ -200,6 +187,7 @@ document.addEventListener("keydown",changeDirection);
 
 const menuButton = document.querySelector('.menu-button');
 const menuText = document.querySelector('.menu-list');
+
 
 let menuOpen = false;
 menuButton.addEventListener('click', () => {
@@ -214,3 +202,29 @@ menuButton.addEventListener('click', () => {
     }
 });
 
+
+//Fade magic for the text items.
+function fade(element) {
+    var op = 1;
+    var timer = setInterval(function () {
+        if (op <= 0.1) {
+            clearInterval(timer);
+            element.style.display = 'none'
+        }
+        element.style.opacity = op;
+        op -= op * 0.1;
+    }, 10);
+}
+
+
+function unfade(element) {
+    var op = 0.1;
+    element.style.display = 'block';
+    var timer = setInterval(function () {
+        if (op >= 1) {
+            clearInterval(timer);
+        }
+        element.style.opacity = op;
+        op += op * 0.1;
+    }, 10);
+}
