@@ -8,7 +8,7 @@ var volume = 1;
 var unmute = document.getElementById('speaker');
        
 
-var snake = [{x: 340, y: 320}, {x: 320, y: 320}, {x:300, y: 320}, {x:280, y: 320}, {x:260, y: 320}];
+var snake = [{x: 160, y: 200}, {x: 180, y: 200}, {x:200, y: 200}, {x:220, y: 200}, {x:240, y: 200}];
 
 // Plots a single segment of the snake on the canvas.
 function drawSnakePart(snakePart) {
