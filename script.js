@@ -28,12 +28,12 @@ function drawSnake() {
 }
 
 // Params controlling snake and food.
-let foodx;
-let foody;
-let changingDirection = false;
-let dx = 20;
-let dy = 0;
-let score = 0;
+var foodx;
+var foody;
+var changingDirection = false;
+var dx = 20;
+var dy = 0;
+var score = 0;
 
 
 // Moves the snake on the screen by editting the snake array.
@@ -144,7 +144,6 @@ function restart(e) {
         restartP.style.display = 'none';
 
         main();
-        console.log(dx);
     }
 }
 
