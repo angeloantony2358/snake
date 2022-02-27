@@ -10,7 +10,7 @@ var volume = 1;
 var unmute = document.getElementById('speaker');
        
 // Initial snake position.
-var snake = [{x: 160, y: 200}, {x: 180, y: 200}, {x:200, y: 200}, {x:220, y: 200}, {x:240, y: 200}];
+var snake = [ { x: 240, y: 200 }, { x: 220, y: 200 }, { x: 200, y: 200 }, { x: 180, y: 200 }, { x: 160, y: 200 } ];// Well that was a stupid mistake.
 
 
 // Plots a single segment of the snake on the canvas.
