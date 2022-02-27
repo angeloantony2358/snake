@@ -18,7 +18,7 @@ function drawSnakePart(snakePart) {
     ctx.fillStyle = 'white';
     ctx.strokestyle = 'white';
     ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-    ctx.strokestyle(snakePart.x, snakePart.y, 10, 10);
+    ctx.strokeStyle(snakePart.x - 10, snakePart.y - 10, 10, 10);
 }
 
 
