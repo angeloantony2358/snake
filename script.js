@@ -138,7 +138,7 @@ function gameEnded() {
 //Function to restart the game.
 function restart(e) {
     if (e.keyCode === 32 && gameEnded()) {
-        snake = [{x: 160, y: 200}, {x: 180, y: 200}, {x:200, y: 200}, {x:220, y: 200}, {x:240, y: 200}];
+        snake = [ { x: 240, y: 200 }, { x: 220, y: 200 }, { x: 200, y: 200 }, { x: 180, y: 200 }, { x: 160, y: 200 } ];
         dx = 20;
         dy = 0;
         score = 0;
