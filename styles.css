@@ -4,10 +4,7 @@ canvas {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    border-radius: 10px;
     box-shadow: 2px 2px 100px rgb(41, 40, 40);
-    border-style: solid;
-    border-width: 2px;
 }
 
 body {
