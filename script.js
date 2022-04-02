@@ -2,6 +2,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const scorep = document.getElementById('score');
 
+// This is the restart button
 var restartP = document.getElementById('restart');
 restartP.style.display = 'none';
 
@@ -12,62 +13,48 @@ var unmute = document.getElementById('speaker');
 // Initial snake position.
 var snake = [ { x: 240, y: 200 }, { x: 220, y: 200 }, { x: 200, y: 200 }, { x: 180, y: 200 }, { x: 160, y: 200 } ];// Well that was a stupid mistake.
 
-
-// Plots a single segment of the snake on the canvas.
-function drawSnakePart(snakePart) {
-    ctx.fillStyle = 'white';
-    ctx.strokestyle = 'white';
-    ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-    //ctx.strokeRect(snakePart.x - 10, snakePart.y - 10, 20, 20);
-}
-
-// Plots the snake on the canvas.
+// This function draws the entire snake.
 function drawSnake() {
-    snake.forEach(drawSnakePart);
+    for (const item of snake) {
+        ctx.fillStyle = 'white';
+        ctx.fillRect(item.x, item.y, 20, 20);
+    }
 }
 
-// Params controlling snake and food.
 var foodx;
 var foody;
 var changingDirection = false;
 var dx = 20;
 var dy = 0;
 var score = 0;
-
+scorep.innerHTML = 'SCORE 0'; // Initialising score 0
 
 // Moves the snake on the screen by editting the snake array.
 function moveSnake() {
-    let head = {x: snake[0].x + dx, y: snake[0].y + dy};
+    const head = {x: snake[0].x + dx, y: snake[0].y + dy};
     snake.unshift(head);
-    
     const hasEaten = snake[0].x === foodx && snake[0].y === foody;
 
     if (hasEaten) {
         score += 1;
-        scorep.innerHTML = 'SCORE ' + score.toString();
-        unfade(scorep);
+        scorep.innerHTML = 'SCORE ' + score;
         generateFood();
         if (volume === 1) {
             audio.play();
         }
     } else {
-        snake.pop();
+        snake.pop(); // That is, the snake didn't find food.
     }
 }
 
-
+// This is to clear the old snake before drawing a new snake.
 function clearCanvas() {
-    //  Select the colour to fill the drawing
     ctx.fillStyle = 'black';
-    ctx.strokestyle = "white";
-    // Draw a "filled" rectangle to cover the entire canvas
-    ctx.fillRect(0, 0, canvas.width, canvas.height);   
-    ctx.strokeRect(0, 0, canvas.width, canvas.height); 
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-
 function changeDirection(event) {
-
+    // To check which direction the snake is already moving.
     const goUp = dy === -20;
     const goDown = dy === 20;
     const goRight = dx === 20;
@@ -75,7 +62,7 @@ function changeDirection(event) {
 
     if (changingDirection) return;
     changingDirection = true;
-
+    // This is to make sure stupid things don't happen.
     if (event.key === 'ArrowUp' && !goDown) {
         dx = 0;
         dy = -20;
@@ -94,28 +81,24 @@ function changeDirection(event) {
     }
 }
 
-
 function randomFood(min, max) {
     var number =  Math.round((Math.random() * (max - min) + min) / 20) * 20;
     return number;
 }
 
-
 function generateFood() {
     foodx = randomFood(0, canvas.width - 20);
     foody = randomFood(0, canvas.height - 40);
-    snake.forEach(function hasSnakeEatenFood(part) {
-        const hasEaten = part.x == foodx && part.y == foody;
-        if (hasEaten) drawFood();
-    });
+    const head = snake[0];
+    if (head.x == foodx && head.y == foody) {
+        drawFood();
+    }
 }
 
-
-function drawFood() {
+function drawFood() { // This function is for drawing the food for the first time.
     ctx.fillStyle = "red";
     ctx.fillRect(foodx, foody, 20 ,20);
 }
-
 
 function gameEnded() {
     for(let i = 4; i< snake.length; i++) {
@@ -127,10 +110,8 @@ function gameEnded() {
     const hitRightBorder = snake[0].x > canvas.width - 20;
     const hitTopBorder = snake[0].y < 0;
     const hitBottomBorder = snake[0].y > canvas.height - 10;
-
     return hitLeftBorder || hitRightBorder || hitTopBorder || hitBottomBorder     
 }
-
 
 //Function to restart the game.
 function restart(e) {
@@ -141,19 +122,17 @@ function restart(e) {
         score = 0;
         scorep.innerHTML = 'SCORE 0'
         restartP.style.display = 'none';
-
         main();
     }
 }
 
-
 function main() { 
     if (gameEnded()) {
-        unfade(restartP);
+        restartP.style.display = 'block';
         return;
     }
     changingDirection = false;
-     setTimeout(function onTick() 
+    setTimeout(function onTick() 
    { 
      clearCanvas();
      moveSnake();
@@ -164,7 +143,6 @@ function main() {
      main();
    }, 100)
 }
-
 
 if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     // true for mobile device
@@ -181,7 +159,6 @@ document.addEventListener("keydown",restart);
 document.addEventListener("keydown",changeDirection);
 
 //STYLINGS APART FROM THE GAME MECHANICS
-
 const menuButton = document.querySelector('.menu-button');
 const menuText = document.querySelector('.menu-list');
 
@@ -191,37 +168,10 @@ menuButton.addEventListener('click', () => {
     if (!menuOpen) {
         menuButton.classList.add('open');
         menuOpen = true;
-        unfade(menuText);
+        menuText.style.display = 'block';
     } else {
         menuButton.classList.remove('open');
         menuOpen = false;
-        fade(menuText);
+        menuText.style.display = 'none';
     }
 });
-
-
-//Fade magic for the text items.
-function fade(element) {
-    var op = 1;
-    var timer = setInterval(function () {
-        if (op <= 0.1) {
-            clearInterval(timer);
-            element.style.display = 'none'
-        }
-        element.style.opacity = op;
-        op -= op * 0.1;
-    }, 10);
-}
-
-
-function unfade(element) {
-    var op = 0.1;
-    element.style.display = 'block';
-    var timer = setInterval(function () {
-        if (op >= 1) {
-            clearInterval(timer);
-        }
-        element.style.opacity = op;
-        op += op * 0.1;
-    }, 10);
-}
