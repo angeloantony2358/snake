@@ -18,9 +18,8 @@ function drawSnakePart(snakePart) {
     ctx.fillStyle = 'white';
     ctx.strokestyle = 'white';
     ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-    ctx.strokeRect(snakePart.x - 10, snakePart.y - 10, 20, 20);
+    //ctx.strokeRect(snakePart.x - 10, snakePart.y - 10, 20, 20);
 }
-
 
 // Plots the snake on the canvas.
 function drawSnake() {
