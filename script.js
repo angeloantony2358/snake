@@ -1,12 +1,12 @@
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-var scorep = document.getElementById('score');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const scorep = document.getElementById('score');
 
 var restartP = document.getElementById('restart');
 restartP.style.display = 'none';
 
-var audio = new Audio('crunch.wav');
-var volume = 1;
+const audio = new Audio('crunch.wav');
+const volume = 1;
 var unmute = document.getElementById('speaker');
        
 // Initial snake position.
@@ -18,7 +18,7 @@ function drawSnakePart(snakePart) {
     ctx.fillStyle = 'white';
     ctx.strokestyle = 'white';
     ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-    ctx.strokeRect(snakePart.x - 10, snakePart.y - 10, 10, 10);
+    ctx.strokeRect(snakePart.x - 10, snakePart.y - 10, 20, 20);
 }
 
 
